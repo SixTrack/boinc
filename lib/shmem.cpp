@@ -416,7 +416,7 @@ int create_shmem(key_t key, int size, gid_t gid, void** pp) {
     //
     id = shmget(key, size, IPC_CREAT|0666);
     if (id < 0) {
-        id = shmget(key, size, IPC_CREAT|SHM_R|SHM_W);
+	id = shmget(key, size, IPC_CREAT|S_IRUSR|S_IWUSR);
     }
     if (id < 0) {
         perror("shmget");

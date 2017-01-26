@@ -126,6 +126,7 @@
 #define SECURITY_WIN32
 #endif
 
+#include <windows.h>
 
 #if !defined(__CYGWIN32__) || defined(USE_WINSOCK)
 
@@ -164,7 +165,6 @@ typedef size_t socklen_t;
 
 #endif
 
-#include <windows.h>
 #ifdef HAVE_WINTERNL_H
 #include <winternl.h>
 #endif

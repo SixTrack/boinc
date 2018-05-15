@@ -1,7 +1,9 @@
+#!/usr/bin/env php
 <?php
+
 // This file is part of BOINC.
 // http://boinc.berkeley.edu
-// Copyright (C) 2008 University of California
+// Copyright (C) 2018 University of California
 //
 // BOINC is free software; you can redistribute it and/or modify it
 // under the terms of the GNU Lesser General Public License
@@ -16,15 +18,20 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with BOINC.  If not, see <http://www.gnu.org/licenses/>.
 
-// show summary of results that have been received or timed out recently
+// usage: delete_user.php ID
+// effectively delete the user with given ID
+// USE THIS WITH EXTREME CAUTION.  CAN'T UNDO.
 
-require_once("../inc/util_ops.inc");
+require_once("../inc/user.inc");
+require_once("../inc/boinc_db.inc");
 
-db_init();
-admin_page_head("Result summary");
+die("Delete this line first\n");
 
-admin_show_result_summary();
+$id = (int) $argv[1];
 
-admin_page_tail();
-$cvs_version_tracker[]="\$Id$";  //Generated automatically - do not edit
+$user = BoincUser::lookup_id($id);
+if (!$user) die("no such user\n");
+
+delete_account($user);
+
 ?>

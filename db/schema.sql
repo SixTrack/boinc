@@ -127,6 +127,8 @@ create table user (
     donated                 smallint        not null,
     login_token             char(32)        not null default '',
     login_token_time        double          not null default 0,
+    previous_email_addr     varchar(254)    not null default '',
+    email_addr_change_time  double          not null default 0,
     primary key (id)
 ) engine=InnoDB;
 
@@ -785,6 +787,20 @@ create table token (
     type                    char            not null,
     create_time             integer         not null,
     expire_time             integer,
-    primary key (token),
-    index token_userid (userid)
+    primary key (token)
 ) engine=InnoDB;
+
+create table user_deleted (
+    userid                  integer         not null,
+    public_cross_project_id varchar(254)    not null,
+    create_time             double          not null,
+    primary key (userid)
+) engine=InnoDB;
+
+create table host_deleted (
+    hostid                  integer         not null,
+    public_cross_project_id varchar(254)    not null,
+    create_time             double          not null,
+    primary key (hostid)
+) engine=InnoDB;
+

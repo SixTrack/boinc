@@ -37,6 +37,7 @@ require_once("../inc/bootstrap.inc");
 // parse some stuff from config (do it here for efficiency)
 //
 $config = get_config();
+global $master_url;
 $master_url = parse_config($config , "<master_url>");
 $recaptcha_public_key = parse_config($config, "<recaptcha_public_key>");
 $recaptcha_private_key = parse_config($config, "<recaptcha_private_key>");
@@ -929,6 +930,9 @@ function get_app_types() {
         if (strstr($av->plan_class, "ati")) {
             $t->ati = true;
             $t->count++;
+        } else if (strstr($av->plan_class, "amd")) {
+            $t->ati = true;
+            $t->count++;
         } else if (strstr($av->plan_class, "cuda")) {
             $t->cuda = true;
             $t->count++;
@@ -1006,14 +1010,20 @@ function do_download($path,$name="") {
     readfile($path);
 }
 
-function redirect_to_secure_url($url) {
+// if have SSL but not using it, redirect
+//
+function redirect_to_secure_url() {
     if (defined('SECURE_URL_BASE')
         && strstr(SECURE_URL_BASE, "https://")
-        && (!isset($_SERVER['HTTPS']) || !$_SERVER['HTTPS'])
+        && empty($_SERVER['HTTPS'])
     ) {
-        Header("Location: ".SECURE_URL_BASE."/$url");
+        Header("Location: https://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
         exit;
     }
+}
+
+if (php_sapi_name() != "cli") {
+    redirect_to_secure_url();
 }
 
 function badges_string($is_user, $item, $height) {
@@ -1111,6 +1121,15 @@ function text_start($width=640) {
 }
 function text_end() {
     echo "</div>\n";
+}
+
+// Utility function to check the terms of use.
+function check_termsofuse() {
+    return defined('TERMSOFUSE_FILE') and file_exists(TERMSOFUSE_FILE);
+}
+
+function cert_filename() {
+    return defined("CERT_FILENAME")?CERT_FILENAME:"cert1.php";
 }
 
 $cvs_version_tracker[]="\$Id$";  //Generated automatically - do not edit

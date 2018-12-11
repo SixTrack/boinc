@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * This file is part of BOINC.
  * http://boinc.berkeley.edu
  * Copyright (C) 2012 University of California
@@ -15,7 +15,7 @@
  * 
  * You should have received a copy of the GNU Lesser General Public License
  * along with BOINC.  If not, see <http://www.gnu.org/licenses/>.
- ******************************************************************************/
+ */
 package edu.berkeley.boinc.client;
 
 import edu.berkeley.boinc.utils.*;
@@ -399,7 +399,7 @@ public class Monitor extends Service {
 						if(transfers == null) nullValues += "transfers,";
 						if(state.host_info == null) nullValues += "state.host_info,";
 						if(acctMgrInfo == null) nullValues += "acctMgrInfo,";
-					} catch (NullPointerException e) {};
+					} catch (NullPointerException e) {}
 					if(Logging.ERROR) Log.e(Logging.TAG, "readClientStatus(): connection problem, null: " + nullValues);
 				}
 				
@@ -773,8 +773,8 @@ public class Monitor extends Service {
 
 			byte[] md5hash = md5.digest();
 			StringBuilder sb = new StringBuilder();
-			for (int i = 0; i < md5hash.length; ++i) {
-				sb.append(String.format("%02x", md5hash[i]));
+			for (byte singleMd5hash : md5hash) {
+				sb.append(String.format("%02x", singleMd5hash));
 			}
     		
     		return sb.toString();
@@ -795,7 +795,7 @@ public class Monitor extends Service {
     private Integer getPidForProcessName(String processName) {
     	int count;
     	char[] buf = new char[1024];
-    	StringBuffer sb = new StringBuffer();
+    	StringBuilder sb = new StringBuilder();
     	
     	//run ps and read output
     	try {

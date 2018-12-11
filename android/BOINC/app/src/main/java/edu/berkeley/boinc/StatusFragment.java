@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * This file is part of BOINC.
  * http://boinc.berkeley.edu
  * Copyright (C) 2012 University of California
@@ -15,7 +15,7 @@
  * 
  * You should have received a copy of the GNU Lesser General Public License
  * along with BOINC.  If not, see <http://www.gnu.org/licenses/>.
- ******************************************************************************/
+ */
 package edu.berkeley.boinc;
 
 import edu.berkeley.boinc.utils.*;
@@ -99,12 +99,12 @@ public class StatusFragment extends Fragment{
 					currentNetworkSuspendReason != networkSuspendReason) {
 				
 				// set layout and retrieve elements
-				LinearLayout statusWrapper = (LinearLayout) getView().findViewById(R.id.status_wrapper);
-				LinearLayout centerWrapper = (LinearLayout) getView().findViewById(R.id.center_wrapper);
-				LinearLayout restartingWrapper = (LinearLayout) getView().findViewById(R.id.restarting_wrapper);
-				TextView statusHeader = (TextView) getView().findViewById(R.id.status_header);
-				ImageView statusImage = (ImageView) getView().findViewById(R.id.status_image);
-				TextView statusDescriptor = (TextView) getView().findViewById(R.id.status_long);
+				LinearLayout statusWrapper = getView().findViewById(R.id.status_wrapper);
+				LinearLayout centerWrapper = getView().findViewById(R.id.center_wrapper);
+				LinearLayout restartingWrapper = getView().findViewById(R.id.restarting_wrapper);
+				TextView statusHeader = getView().findViewById(R.id.status_header);
+				ImageView statusImage = getView().findViewById(R.id.status_image);
+				TextView statusDescriptor = getView().findViewById(R.id.status_long);
 				
 				restartingWrapper.setVisibility(View.GONE);
 				
@@ -222,12 +222,12 @@ public class StatusFragment extends Fragment{
 			
 			if(setupStatus != ClientStatus.SETUP_STATUS_NOPROJECT) {
 				// set layout and retrieve elements
-				LinearLayout statusWrapper = (LinearLayout) getView().findViewById(R.id.status_wrapper);
-				LinearLayout centerWrapper = (LinearLayout) getView().findViewById(R.id.center_wrapper);
-				LinearLayout restartingWrapper = (LinearLayout) getView().findViewById(R.id.restarting_wrapper);
-				TextView statusHeader = (TextView) getView().findViewById(R.id.status_header);
-				ImageView statusImage = (ImageView) getView().findViewById(R.id.status_image);
-				TextView statusDescriptor = (TextView) getView().findViewById(R.id.status_long);
+				LinearLayout statusWrapper = getView().findViewById(R.id.status_wrapper);
+				LinearLayout centerWrapper = getView().findViewById(R.id.center_wrapper);
+				LinearLayout restartingWrapper = getView().findViewById(R.id.restarting_wrapper);
+				TextView statusHeader = getView().findViewById(R.id.status_header);
+				ImageView statusImage = getView().findViewById(R.id.status_image);
+				TextView statusDescriptor = getView().findViewById(R.id.status_long);
 
 				statusWrapper.setVisibility(View.VISIBLE);
 				restartingWrapper.setVisibility(View.GONE);

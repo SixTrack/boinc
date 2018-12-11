@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * This file is part of BOINC.
  * http://boinc.berkeley.edu
  * Copyright (C) 2012 University of California
@@ -15,7 +15,7 @@
  * 
  * You should have received a copy of the GNU Lesser General Public License
  * along with BOINC.  If not, see <http://www.gnu.org/licenses/>.
- ******************************************************************************/
+ */
 package edu.berkeley.boinc;
 
 import edu.berkeley.boinc.utils.*;
@@ -56,7 +56,7 @@ public class ProjectsFragment extends Fragment {
 
 	private ListView lv;
 	private ProjectsListAdapter listAdapter;
-	private ArrayList<ProjectsListData> data = new ArrayList<ProjectsListData>();
+	private ArrayList<ProjectsListData> data = new ArrayList<>();
 
 	// controls popup dialog
 	Dialog dialogControls;
@@ -84,7 +84,7 @@ public class ProjectsFragment extends Fragment {
     	if(Logging.VERBOSE) Log.v(Logging.TAG,"ProjectsFragment onCreateView");
         // Inflate the layout for this fragment
     	View layout = inflater.inflate(R.layout.projects_layout, container, false);
-		lv = (ListView) layout.findViewById(R.id.projectsList);
+		lv = layout.findViewById(R.id.projectsList);
         listAdapter = new ProjectsListAdapter(getActivity(), lv, R.id.projectsList, data);
 		return layout;
 	}
@@ -236,7 +236,7 @@ public class ProjectsFragment extends Fragment {
 	
 	// takes list of all ongoing transfers and a project id (url) and returns transfer that belong to given project
 	private ArrayList<Transfer> mapTransfersToProject(String id, ArrayList<Transfer> allTransfers) {
-		ArrayList<Transfer> projectTransfers = new ArrayList<Transfer>();
+		ArrayList<Transfer> projectTransfers = new ArrayList<>();
 		for(Transfer trans: allTransfers) {
 			if(trans.project_url.equals(id)) {
 				// project id matches url in transfer, add to list
@@ -296,14 +296,14 @@ public class ProjectsFragment extends Fragment {
 				// layout
 				dialogControls.requestWindowFeature(Window.FEATURE_NO_TITLE);
 				dialogControls.setContentView(R.layout.dialog_list);
-				ListView list = (ListView)dialogControls.findViewById(R.id.options);
+				ListView list = dialogControls.findViewById(R.id.options);
 				
 				// add control items depending on:
 				// - type, account manager vs. project
 				// - client status, e.g. either suspend or resume
 				// - show advanced preference
 				// - project attached via account manager (e.g. hide Remove)
-				ArrayList<ProjectControl> controls = new ArrayList<ProjectControl>();
+				ArrayList<ProjectControl> controls = new ArrayList<>();
 				if(isMgr) {
 					((TextView)dialogControls.findViewById(R.id.title)).setText(R.string.projects_control_dialog_title_acctmgr);
 
@@ -335,7 +335,7 @@ public class ProjectsFragment extends Fragment {
 				if(Logging.DEBUG) Log.d(Logging.TAG,"dialog list adapter entries: " + controls.size());
 				
 				// buttons
-				Button cancelButton = (Button) dialogControls.findViewById(R.id.cancel);
+				Button cancelButton = dialogControls.findViewById(R.id.cancel);
 				cancelButton.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -374,9 +374,9 @@ public class ProjectsFragment extends Fragment {
 					final Dialog dialog = new Dialog(getActivity());
 					dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 					dialog.setContentView(R.layout.dialog_confirm);
-					Button confirm = (Button) dialog.findViewById(R.id.confirm);
-					TextView tvTitle = (TextView)dialog.findViewById(R.id.title);
-					TextView tvMessage = (TextView)dialog.findViewById(R.id.message);
+					Button confirm = dialog.findViewById(R.id.confirm);
+					TextView tvTitle = dialog.findViewById(R.id.title);
+					TextView tvMessage = dialog.findViewById(R.id.message);
 					
 					// operation dependend texts
 					if (operation == RpcClient.PROJECT_DETACH) {
@@ -404,7 +404,7 @@ public class ProjectsFragment extends Fragment {
 							dialogControls.dismiss();
 						}
 					});
-					Button cancel = (Button) dialog.findViewById(R.id.cancel);
+					Button cancel = dialog.findViewById(R.id.cancel);
 					cancel.setOnClickListener(new OnClickListener() {
 						@Override
 						public void onClick(View v) {

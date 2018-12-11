@@ -23,6 +23,7 @@
 #include "average.h"
 #include "opencl_boinc.h"
 #include "parse.h"
+#include "wslinfo.h"
 
 // Sizes of text buffers in memory, corresponding to database BLOBs.
 // The following is for regular blobs, 64KB
@@ -371,6 +372,8 @@ struct HOST {
     bool p_vm_extensions_disabled;
     int num_opencl_cpu_platforms;
     OPENCL_CPU_PROP opencl_cpu_prop[MAX_OPENCL_CPU_PLATFORMS];
+    bool wsl_available;
+    WSLS wsls;
 
     // stuff from time_stats
     double cpu_and_network_available_frac;
@@ -605,7 +608,7 @@ struct RESULT {
     int batch;
     int file_delete_state;          // see above; values for file_delete_state
     int validate_state;
-    double claimed_credit;          // deprecated
+    double claimed_credit;          // used for post-assigned credit
     double granted_credit;          // == canonical credit of WU
     double opaque;                  // project-specific; usually external ID
     int random;                     // determines send order
@@ -846,6 +849,16 @@ struct CREDIT_TEAM {
     double expavg;
     double expavg_time;
     int credit_type;
+    void clear();
+};
+
+struct CONSENT_TYPE {
+    DB_ID_TYPE id;
+    char shortname[256];
+    char description[256];
+    int enabled;
+    int project_specific;
+    int privacypref;
     void clear();
 };
 

@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * This file is part of BOINC.
  * http://boinc.berkeley.edu
  * Copyright (C) 2016 University of California
@@ -15,7 +15,7 @@
  * 
  * You should have received a copy of the GNU Lesser General Public License
  * along with BOINC.  If not, see <http://www.gnu.org/licenses/>.
- ******************************************************************************/
+ */
 package edu.berkeley.boinc.adapter;
 
 import edu.berkeley.boinc.BOINCActivity;
@@ -41,7 +41,7 @@ public class NavDrawerListAdapter extends BaseAdapter{
 
 	//private final String TAG = "NavDrawerListAdapter";
 	private Context context;
-	private ArrayList<NavDrawerItem> navDrawerItems = new ArrayList<NavDrawerItem>();
+	private ArrayList<NavDrawerItem> navDrawerItems = new ArrayList<>();
 	
 	public int selectedMenuId = 0;
 	
@@ -84,17 +84,17 @@ public class NavDrawerListAdapter extends BaseAdapter{
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		if(Logging.VERBOSE) Log.d(Logging.TAG, "NavDrawerListAdapter.getView() for : " + navDrawerItems.get(position).title + navDrawerItems.get(position).isCounterVisible + navDrawerItems.get(position).isSubItem + navDrawerItems.get(position).isProjectItem);
-		if (convertView == null || !((String)convertView.getTag()).equals(navDrawerItems.get(position).title)) {
+		if (convertView == null || !(convertView.getTag()).equals(navDrawerItems.get(position).title)) {
 			int layoutId = R.layout.navlist_listitem;
 			if(navDrawerItems.get(position).isSubItem()) layoutId = R.layout.navlist_listitem_subitem;
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = mInflater.inflate(layoutId, null);
         }
         
-		RelativeLayout wrapper = (RelativeLayout) convertView.findViewById(R.id.listitem);
-        ImageView imgIcon = (ImageView) convertView.findViewById(R.id.icon);
-        TextView txtTitle = (TextView) convertView.findViewById(R.id.title);
-        TextView txtCount = (TextView) convertView.findViewById(R.id.counter);
+		RelativeLayout wrapper = convertView.findViewById(R.id.listitem);
+        ImageView imgIcon = convertView.findViewById(R.id.icon);
+        TextView txtTitle = convertView.findViewById(R.id.title);
+        TextView txtCount = convertView.findViewById(R.id.counter);
          
         if(navDrawerItems.get(position).isProjectItem) {
         	Bitmap icon = navDrawerItems.get(position).getProjectIcon();
@@ -142,7 +142,7 @@ public class NavDrawerListAdapter extends BaseAdapter{
 	
 	/**
 	 * Compares list of projects to items represented in nav bar.
-	 * @param projects
+	 * @param projects Project list
 	 * @return Returns number of project items in nav bar after adding
 	 */
 	public Integer compareAndAddProjects(ArrayList<Project> projects){

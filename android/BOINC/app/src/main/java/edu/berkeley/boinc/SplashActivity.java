@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * This file is part of BOINC.
  * http://boinc.berkeley.edu
  * Copyright (C) 2012 University of California
@@ -15,7 +15,7 @@
  * 
  * You should have received a copy of the GNU Lesser General Public License
  * along with BOINC.  If not, see <http://www.gnu.org/licenses/>.
- ******************************************************************************/
+ */
 package edu.berkeley.boinc;
 
 import edu.berkeley.boinc.attach.SelectionListActivity;
@@ -120,7 +120,7 @@ public class SplashActivity extends Activity {
         doBindService();
         
         // set long click listener to go to eventlog
-        ImageView imageView = (ImageView) findViewById(R.id.logo);
+        ImageView imageView = findViewById(R.id.logo);
         imageView.setOnLongClickListener(new OnLongClickListener() {
 
             @Override
@@ -174,6 +174,5 @@ public class SplashActivity extends Activity {
     	notExclusiveDialogIntent.setClassName("edu.berkeley.boinc", "edu.berkeley.boinc.BoincNotExclusiveDialog");
 	    startActivity(notExclusiveDialogIntent);
 		finish();
-		return;
 	}
 }
